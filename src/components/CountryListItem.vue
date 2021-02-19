@@ -1,34 +1,27 @@
 <template>
   <ion-item class="list-item">
-    <div slot="start" :class="country ? 'dot dot-unread' : 'dot'"></div>
+    <div slot="start"></div>
     <ion-label class="ion-text-wrap">
-      <h2>
-        {{ country.name }}
-        <span class="date">
-          <ion-icon
-            :icon="chevronForward"
-            size="small"
-            v-if="isIos()"
-          ></ion-icon>
+      <ion-row class="ion-justify-content-start">
+        <ion-col size="3">
+          <div>
+            <ion-thumbnail item-left> <IonImg v-if="country.alpha2Code" :src="`http://www.geognos.com/api/en/countries/flag/${country.alpha2Code}.png`"/> </ion-thumbnail>
+          </div>
+        </ion-col>
+        <ion-col size="6">
+          <div>
+            <h2>
+              {{ country.name }}
+              <span class="date">
+          <ion-icon :icon="chevronForward" size="small" v-if="isIos()"></ion-icon>
         </span>
-      </h2>
-      <h3>{{ country.region }}</h3>
-      <h3>{{ country.capital }}</h3>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-        mollit anim id est laborum.
-      </p>
-      <div v-if="country.date">
-        <p>
-          {{ country.date }}
-        </p>
-        <!-- <p @click="del(country.alpha2Code)">Supprimer</p> -->
-      </div>
+            </h2>
+            <h3>Capitale : {{ country.capital }}</h3>
+            <h3>Continent : {{ country.region }}</h3>
+            <h3>Date :  {{ country.name }}</h3>
+          </div>
+        </ion-col>
+      </ion-row>
     </ion-label>
   </ion-item>
 </template>
@@ -44,6 +37,7 @@ export default defineComponent({
     IonIcon,
     IonItem,
     IonLabel,
+    IonImg
   },
   props: {
     country: Object,
@@ -64,6 +58,7 @@ export default defineComponent({
 </script>
 
 <style scoped>
+
 .list-item {
   --padding-start: 0;
   --inner-padding-end: 0;
