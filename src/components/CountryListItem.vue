@@ -5,25 +5,41 @@
       <h2>
         {{ country.name }}
         <span class="date">
-          <ion-icon :icon="chevronForward" size="small" v-if="isIos()"></ion-icon>
+          <ion-icon
+            :icon="chevronForward"
+            size="small"
+            v-if="isIos()"
+          ></ion-icon>
         </span>
       </h2>
       <h3>{{ country.region }}</h3>
       <h3>{{ country.capital }}</h3>
       <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+        mollit anim id est laborum.
       </p>
+      <div v-if="country.date">
+        <p>
+          {{ country.date }}
+        </p>
+        <!-- <p @click="del(country.alpha2Code)">Supprimer</p> -->
+      </div>
     </ion-label>
   </ion-item>
 </template>
 
 <script lang="ts">
-import { IonIcon, IonItem, IonLabel, IonNote } from '@ionic/vue';
-import { chevronForward } from 'ionicons/icons';
-import { defineComponent } from 'vue';
+import { IonIcon, IonItem, IonLabel, IonNote } from "@ionic/vue";
+import { chevronForward } from "ionicons/icons";
+import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: 'CountryListItem',
+  name: "CountryListItem",
   components: {
     IonIcon,
     IonItem,
@@ -35,12 +51,15 @@ export default defineComponent({
   methods: {
     isIos: () => {
       const win = window as any;
-      return win && win.Ionic && win.Ionic.mode === 'ios';
-    }
+      return win && win.Ionic && win.Ionic.mode === "ios";
+    },
+    // del(alpha2Code: any) {
+    //   this.$store.dispatch("removeCountry", alpha2Code);
+    // },
   },
   data() {
-    return { chevronForward }
-  }
+    return { chevronForward };
+  },
 });
 </script>
 
@@ -55,7 +74,7 @@ export default defineComponent({
   margin-bottom: 12px;
 }
 
-.list-item  h2 {
+.list-item h2 {
   font-weight: 600;
   margin: 0;
 }

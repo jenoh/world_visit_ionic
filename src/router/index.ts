@@ -2,6 +2,8 @@ import { createRouter, createWebHistory } from '@ionic/vue-router';
 import { RouteRecordRaw } from 'vue-router';
 import Home from '../views/Home.vue'
 import AddCountry from '../views/AddCountry.vue'
+import AddDate from '../views/AddDate.vue'
+
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -17,6 +19,11 @@ const routes: Array<RouteRecordRaw> = [
     path: '/add-country',
     name: 'AddCountry',
     component: AddCountry
+  },
+  {
+    path: '/add-date/:numericCode',
+    name: 'AddDate',
+    component: AddDate
   },
   {
     path: '/message/:id',
