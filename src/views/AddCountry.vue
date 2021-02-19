@@ -16,7 +16,6 @@
                     <ion-title size="large">Inbox</ion-title>
                 </ion-toolbar>
             </ion-header>
-
             <ion-list>
                 <CountryListItem v-for="country in countries" :key="country.alpha2Code" :country="country" />
             </ion-list>
@@ -28,14 +27,14 @@
     import { IonContent, IonHeader, IonList, IonPage, IonRefresher, IonRefresherContent, IonTitle, IonToolbar } from '@ionic/vue';
     import CountryListItem from '@/components/CountryListItem.vue';
     import { defineComponent } from 'vue';
-    import { getMessages } from '@/data/messages';
     import axios from 'axios';
 
     export default defineComponent({
         name: 'AddCountry',
         data() {
             return {
-                countries: null as any
+                countries: null as any,
+                countryName: null as any,
             }
         },
         mounted () {
@@ -48,7 +47,7 @@
                 setTimeout(() => {
                     ev.detail.complete();
                 }, 3000);
-            }
+            },
         },
         components: {
             IonContent,
