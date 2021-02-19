@@ -1,48 +1,62 @@
 <template>
   <ion-page>
-    <ion-header :translucent="true">
-      <ion-toolbar>
-        <ion-title>Inbox</ion-title>
-      </ion-toolbar>
-    </ion-header>
-    
     <ion-content :fullscreen="true">
       <ion-refresher slot="fixed" @ionRefresh="refresh($event)">
         <ion-refresher-content></ion-refresher-content>
       </ion-refresher>
-      
-      <ion-header collapse="condense">
+      <ion-header class="header">
         <ion-toolbar>
-          <ion-title size="large">Inbox</ion-title>
+          <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+          </ion-buttons>
+          <ion-title>WorldVisit</ion-title>
         </ion-toolbar>
       </ion-header>
-      
       <ion-list>
-        <MessageListItem v-for="message in messages" :key="message.id" :message="message" />
+        <!-- {{countries}} -->
+        <CountryListItem
+          v-for="country in countries"
+          :key="country.alpha2Code"
+          :country="country"
+        />
       </ion-list>
     </ion-content>
+    <ion-footer>
+      <ion-button expand="full" @click="redirect()">Ajouter un pays</ion-button>
+    </ion-footer>
   </ion-page>
 </template>
 
+
 <script lang="ts">
-import { IonContent, IonHeader, IonList, IonPage, IonRefresher, IonRefresherContent, IonTitle, IonToolbar } from '@ionic/vue';
-import MessageListItem from '@/components/MessageListItem.vue';
-import { defineComponent } from 'vue';
-import { getMessages } from '@/data/messages';
+import CountryListItem from "@/components/CountryListItem.vue";
+import {
+  IonContent,
+  IonHeader,
+  IonList,
+  IonPage,
+  IonRefresher,
+  IonRefresherContent,
+  IonTitle,
+  IonToolbar,
+} from "@ionic/vue";
+import MessageListItem from "@/components/MessageListItem.vue";
+import { computed, defineComponent } from "vue";
+import { getMessages } from "@/data/messages";
+import { useStore } from "vuex";
 
 export default defineComponent({
-  name: 'Home',
-  data() {
+  name: "Home",
+  setup() {
+    const store = useStore();
     return {
-      messages: getMessages()
-    }
+      countries: computed(() => store.state.countries),
+    };
   },
   methods: {
-    refresh: (ev: CustomEvent) => {
-      setTimeout(() => {
-        ev.detail.complete();
-      }, 3000);
-    }
+    redirect() {
+      this.$router.push("/add-country");
+    },
   },
   components: {
     IonContent,
@@ -53,7 +67,7 @@ export default defineComponent({
     IonRefresherContent,
     IonTitle,
     IonToolbar,
-    MessageListItem
+    CountryListItem,
   },
 });
 </script>

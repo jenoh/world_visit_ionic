@@ -2,7 +2,6 @@
   <ion-item class="list-item">
     <div slot="start"></div>
     <ion-label class="ion-text-wrap">
-
       <ion-row class="ion-justify-content-start">
         <ion-col size="3">
           <div>
@@ -19,21 +18,21 @@
             </h2>
             <h3>Capitale : {{ country.capital }}</h3>
             <h3>Continent : {{ country.region }}</h3>
+            <h3>Date :  {{ country.name }}</h3>
           </div>
         </ion-col>
       </ion-row>
-
     </ion-label>
   </ion-item>
 </template>
 
 <script lang="ts">
-import { IonIcon, IonItem, IonLabel, IonImg  } from '@ionic/vue';
-import { chevronForward } from 'ionicons/icons';
-import { defineComponent } from 'vue';
+import { IonIcon, IonItem, IonLabel, IonNote } from "@ionic/vue";
+import { chevronForward } from "ionicons/icons";
+import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: 'CountryListItem',
+  name: "CountryListItem",
   components: {
     IonIcon,
     IonItem,
@@ -46,12 +45,15 @@ export default defineComponent({
   methods: {
     isIos: () => {
       const win = window as any;
-      return win && win.Ionic && win.Ionic.mode === 'ios';
-    }
+      return win && win.Ionic && win.Ionic.mode === "ios";
+    },
+    // del(alpha2Code: any) {
+    //   this.$store.dispatch("removeCountry", alpha2Code);
+    // },
   },
   data() {
-    return { chevronForward }
-  }
+    return { chevronForward };
+  },
 });
 </script>
 
@@ -67,7 +69,7 @@ export default defineComponent({
   margin-bottom: 12px;
 }
 
-.list-item  h2 {
+.list-item h2 {
   font-weight: 600;
   margin: 0;
 }

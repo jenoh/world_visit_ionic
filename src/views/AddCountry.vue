@@ -1,16 +1,21 @@
 <template>
-    <ion-page>
-        <ion-header :translucent="true">
-            <ion-toolbar>
-                <ion-title>Inbox</ion-title>
-            </ion-toolbar>
-        </ion-header>
+  <ion-page>
+    <ion-header class="header">
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-back-button
+            default-href="add-country"
+            @click="back()"
+          ></ion-back-button>
+        </ion-buttons>
+        <ion-title>WorldVisit</ion-title>
+      </ion-toolbar>
+    </ion-header>
 
-        <ion-content :fullscreen="true">
-            <ion-refresher slot="fixed" @ionRefresh="refresh($event)">
-                <ion-refresher-content></ion-refresher-content>
-            </ion-refresher>
-
+    <ion-content :fullscreen="true">
+      <ion-refresher slot="fixed" @ionRefresh="refresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+      </ion-refresher>
             <ion-header collapse="condense">
                 <ion-toolbar>
                     <ion-title size="large">Inbox</ion-title>
