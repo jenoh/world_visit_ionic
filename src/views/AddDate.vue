@@ -42,13 +42,12 @@ import {
   IonDatetime,
 } from "@ionic/vue";
 import { defineComponent } from "vue";
-// import { useStore } from "vuex";
 
 export default defineComponent({
   name: "AddDate",
-  //   setup() {
-  //     const store = useStore();
-  //   },
+    // setup() {
+    //   const store = useStore();
+    // },
   data() {
     return {
       numericCode: this.$route.params.numericCode,

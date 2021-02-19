@@ -18,7 +18,7 @@
             </h2>
             <h3>Capitale : {{ country.capital }}</h3>
             <h3>Continent : {{ country.region }}</h3>
-            <h3>Date :  {{ country.name }}</h3>
+            <h3 v-if="country.date">Date :  {{ country.date }}</h3>
           </div>
         </ion-col>
       </ion-row>
@@ -27,7 +27,7 @@
 </template>
 
 <script lang="ts">
-import { IonIcon, IonItem, IonLabel, IonNote } from "@ionic/vue";
+import { IonIcon, IonItem, IonLabel, IonImg } from "@ionic/vue";
 import { chevronForward } from "ionicons/icons";
 import { defineComponent } from "vue";
 

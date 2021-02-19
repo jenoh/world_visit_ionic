@@ -13,57 +13,64 @@
     </ion-header>
 
     <ion-content :fullscreen="true">
-      <ion-refresher slot="fixed" @ionRefresh="refresh($event)">
-        <ion-refresher-content></ion-refresher-content>
-      </ion-refresher>
-            <ion-header collapse="condense">
-                <ion-toolbar>
-                    <ion-title size="large">Inbox</ion-title>
-                </ion-toolbar>
-            </ion-header>
-            <ion-list>
-                <CountryListItem v-for="country in countries" :key="country.alpha2Code" :country="country" />
-            </ion-list>
-        </ion-content>
-    </ion-page>
+      <ion-list>
+        <CountryListItem
+          v-for="country in countries"
+          :key="country.alpha2Code"
+          :country="country"
+          @click="addDate(country.alpha2Code)"
+        />
+      </ion-list>
+    </ion-content>
+  </ion-page>
 </template>
 
 <script lang="ts">
-    import { IonContent, IonHeader, IonList, IonPage, IonRefresher, IonRefresherContent, IonTitle, IonToolbar } from '@ionic/vue';
-    import CountryListItem from '@/components/CountryListItem.vue';
-    import { defineComponent } from 'vue';
-    import axios from 'axios';
+import {
+  IonContent,
+  IonHeader,
+  IonList,
+  IonPage,
+  IonTitle,
+  IonToolbar,
+} from "@ionic/vue";
+import CountryListItem from "@/components/CountryListItem.vue";
+import { defineComponent } from "vue";
+import axios from "axios";
 
-    export default defineComponent({
-        name: 'AddCountry',
-        data() {
-            return {
-                countries: null as any,
-                countryName: null as any,
-            }
-        },
-        mounted () {
-            axios
-                .get('https://restcountries.eu/rest/v2/all')
-                .then(response => (this.countries = response.data))
-        },
-        methods: {
-            refresh: (ev: CustomEvent) => {
-                setTimeout(() => {
-                    ev.detail.complete();
-                }, 3000);
-            },
-        },
-        components: {
-            IonContent,
-            IonHeader,
-            IonList,
-            IonPage,
-            IonRefresher,
-            IonRefresherContent,
-            IonTitle,
-            IonToolbar,
-            CountryListItem
-        },
-    });
+export default defineComponent({
+  name: "AddCountry",
+  data() {
+    return {
+      countries: null as any,
+    };
+  },
+  mounted() {
+    axios
+      .get("https://restcountries.eu/rest/v2/all")
+      .then((response) => (this.countries = response.data));
+  },
+  methods: {
+    refresh: (ev: CustomEvent) => {
+      setTimeout(() => {
+        ev.detail.complete();
+      }, 3000);
+    },
+    back() {
+      this.$router.push("/home");
+    },
+    addDate(numericCode: any) {
+      this.$router.push({ path: `/add-date/${numericCode}` });
+    },
+  },
+  components: {
+    IonContent,
+    IonHeader,
+    IonList,
+    IonPage,
+    IonTitle,
+    IonToolbar,
+    CountryListItem,
+  },
+});
 </script>
